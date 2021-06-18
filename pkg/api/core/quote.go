@@ -14,7 +14,10 @@ func Create(quote model.Quote) (model.Quote, error) {
 	id := generateNextId()
 	quote.SetId(id)
 	err := ds.Create(id, quote)
-	return quote, err
+	if err != nil {
+		return model.Quote{}, err
+	}
+	return quote, nil
 }
 
 func generateNextId() int {
