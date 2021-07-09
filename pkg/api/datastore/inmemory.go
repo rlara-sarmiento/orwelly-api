@@ -28,5 +28,5 @@ func (m *InMemory) Create(id int, quote model.Quote) error {
 }
 
 func (m *InMemory) Get(id int) (model.Quote, error) {
-	return model.Quote{}, errors.New("Unimplemented")
+	return m.quotes[id], errors.New("Unimplemented")
 }

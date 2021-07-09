@@ -10,6 +10,10 @@ import (
 
 var ds datastore.Quotes
 
+func ConsultList() datastore.Quotes {
+	return ds
+}
+
 func Create(quote model.Quote) (model.Quote, error) {
 	id := generateNextId()
 	quote.SetId(id)
