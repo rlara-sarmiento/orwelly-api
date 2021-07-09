@@ -9,6 +9,8 @@ import (
 var routes = []Route{
 	{Path: "/hello", Method: "GET", HandlerFunc: handler.Hello},
 	{Path: "/quotes", Method: "POST", HandlerFunc: handler.CreateQuote},
+	//{Path: "/listQtes", Method: "GET", HandlerFunc: handler.ListQuotes},
+	{Path: "/quotes/{id}", Method: "GET", HandlerFunc: handler.GetQuote},
 }
 
 // Return a new Router instance with valid routes

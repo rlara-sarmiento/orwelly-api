@@ -28,5 +28,8 @@ func (m *InMemory) Create(id int, quote model.Quote) error {
 }
 
 func (m *InMemory) Get(id int) (model.Quote, error) {
-	return model.Quote{}, errors.New("Unimplemented")
+	if _, exists := m.quotes[id]; exists {
+		return m.quotes[id], nil
+	}
+	return model.Quote{}, errors.New("not found")
 }
