@@ -10,7 +10,7 @@ import (
 
 func CreateQuote(w http.ResponseWriter, r *http.Request) {
 	var req createQuoteRequest
-	err := json.NewDecoder(r.Body).Decode(&req)
+	err := json.NewDecoder(r.Body).Decode(&req) //body (postman) try to convert  and save in req
 	if err != nil {
 		sendErrResponse(w, http.StatusBadRequest, "Cannot parse request")
 		return

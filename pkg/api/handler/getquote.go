@@ -2,31 +2,25 @@ package handler
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/rlara-sarmiento/orwelly-api/pkg/api/core"
-	"github.com/rlara-sarmiento/orwelly-api/pkg/api/datastore"
 	"github.com/rlara-sarmiento/orwelly-api/pkg/api/model"
 )
 
-var ds datastore.Quotes
-
 func GetQuote(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	var req model.Quote
 	id, _ := strconv.Atoi(vars["id"])
-	x := core.ConsultList()
-	y, err := x.Get(id)
-	fmt.Println(y, err)
-	if err == errors.New("Unimplemented") {
+	quote, err := core.Get(id)
+
+	if err == errors.New("not found") {
 		NotFound(w, r)
 		return
 	}
-	req.Id, req.Author, req.Text = id, y.Author, y.Text
-	sendJsonResponse(w, http.StatusOK, req)
+
+	sendJsonResponse(w, http.StatusOK, getQuoteResponseFromQuote(quote))
 }
 
 type getQuoteResponse struct {
